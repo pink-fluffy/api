@@ -1,0 +1,20 @@
+version: "3"
+services:
+  identity-service:
+    build: https://${PAT}:@github.com/pink-fluffy/identity.git#main
+    ports:
+      - "9044:9044"
+    env_file: .env
+  products-service:
+    build: https://${PAT}:@github.com/pink-fluffy/products.git#main
+    ports:
+      - "9045:9045"
+    env_file: .env
+  gateway-service:
+    build: https://${PAT}:@github.com/pink-fluffy/gateway.git#main
+    ports:
+      - "9043:9043"
+    env_file: .env
+    depends_on:
+      - identity-service
+      - products-service
