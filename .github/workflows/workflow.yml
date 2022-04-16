@@ -37,7 +37,7 @@ jobs:
 
       - name: Navigate to deploy dir
         run: |
-          ssh $SSH_USER@$SSH_HOST
+          ssh -i ~/.ssh/production.key lens@shopunicorn.live
 
       - name: Run deploy.sh
         if: ${{ always() }}
