@@ -31,13 +31,13 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          SSH_USER: ${{ secrets.PRODUCTION_SSH_USER }}
-          SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
-          SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: Navigate to deploy dir
         run: |
-          ssh -i ~/.ssh/production.key lens@shopunicorn.live
+          ssh production
 
       - name: Run deploy.sh
         if: ${{ always() }}
