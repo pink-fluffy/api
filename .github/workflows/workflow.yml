@@ -21,17 +21,18 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/production.key
           chmod 600 ~/.ssh/production.key
           cat >>~/.ssh/config <<END
-          ssh-keyscan -H shopunicorn.live > ~/.ssh/known_hosts
           Host production
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/production.key
+            StrictHostKeyChecking no
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
+          SRC_DIR: ${{ secrets.SRC_DIR }}
 
       - name: SSH and run deploy script
-        run: ssh production 'cd ~/shopunicorn/api && ./deploy.sh'
+        run: ssh production 'cd $SRC_DIR && ./deploy.sh'
 
