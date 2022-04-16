@@ -42,5 +42,6 @@ jobs:
       - name: Run deploy.sh
         if: ${{ always() }}
         run: |
-          cd shopunicorn/api
+          ls
+          cd ~/shopunicorn/api
           ./deploy.sh
