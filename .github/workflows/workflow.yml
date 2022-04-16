@@ -36,8 +36,10 @@ jobs:
           SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
 
       - name: Navigate to deploy dir
-        run: ssh production 'cd shopunicorn/api'
+        run: ssh production
 
       - name: Run deploy.sh
         if: ${{ always() }}
-        run: './deploy.sh'
+        run: |
+          cd shopunicorn/api
+          ./deploy.sh
