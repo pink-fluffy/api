@@ -35,13 +35,10 @@ jobs:
           SSH_KEY: ${{ secrets.SSH_KEY }}
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
-      - name: Navigate to deploy dir
+      - name: SSH and run deploy script
         run: |
-          ssh production
-
-      - name: Run deploy.sh
-        if: ${{ always() }}
-        run: |
+          ssh -i production
           ls
           cd ~/shopunicorn/api
           ./deploy.sh
+
