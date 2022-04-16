@@ -10,13 +10,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 jobs:
-  # test:
-  #   ...
   deploy:
     name: "Deploy to production"
     runs-on: ubuntu-18.04
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    # needs: test
     steps:
       - name: Configure SSH
         run: |
@@ -24,11 +21,11 @@ jobs:
           echo "$SSH_KEY" > ~/.ssh/production.key
           chmod 600 ~/.ssh/production.key
           cat >>~/.ssh/config <<END
+          ssh-keyscan -H shopunicorn.live > ~/.ssh/known_hosts
           Host production
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/production.key
-            StrictHostKeyChecking no
           END
         env:
           SSH_USER: ${{ secrets.SSH_USER }}
