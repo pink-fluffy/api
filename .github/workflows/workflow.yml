@@ -34,5 +34,5 @@ jobs:
           SRC_DIR: ${{ secrets.SRC_DIR }}
 
       - name: SSH and run deploy script
-        run: ssh production 'cd $SRC_DIR && ./deploy.sh'
+        run: ssh production 'cd ~/shopunicorn/api && ./deploy.sh'
 
