@@ -14,7 +14,7 @@ jobs:
   #   ...
   deploy:
     name: "Deploy to production"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     # needs: test
     steps:
@@ -28,8 +28,8 @@ jobs:
             HostName $SSH_HOST
             User $SSH_USER
             IdentityFile ~/.ssh/production.key
+            StrictHostKeyChecking no
           END
-          ssh-keyscan -H shopunicorn.live > ~/.ssh/known_hosts
         env:
           SSH_USER: ${{ secrets.PRODUCTION_SSH_USER }}
           SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
