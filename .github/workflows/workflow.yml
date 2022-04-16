@@ -36,9 +36,5 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
 
       - name: SSH and run deploy script
-        run: |
-          ssh -i production
-          ls
-          cd ~/shopunicorn/api
-          ./deploy.sh
+        run: ssh production 'cd ~/shopunicorn/api && ./deploy.sh'
 
