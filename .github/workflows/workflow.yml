@@ -36,7 +36,8 @@ jobs:
           SSH_HOST: ${{ secrets.PRODUCTION_SSH_HOST }}
 
       - name: Navigate to deploy dir
-        run: ssh $SSH_USER@$SSH_HOST
+        run: |
+          ssh $SSH_USER@$SSH_HOST
 
       - name: Run deploy.sh
         if: ${{ always() }}
