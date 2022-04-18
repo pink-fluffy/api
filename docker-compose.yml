@@ -13,7 +13,7 @@ services:
     depends_on:
       - identity-service
   carts-service:
-    build: "https://${PAT}:@github.com/pink-fluffy/products.git#main"
+    build: "https://${PAT}:@github.com/pink-fluffy/carts.git#main"
     ports:
       - "9046:9046"
     env_file: .env
